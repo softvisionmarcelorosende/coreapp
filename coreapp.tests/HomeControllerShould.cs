@@ -7,12 +7,24 @@ namespace coreapp.tests
 {
     public class HomeControllerShould
     {
+        private readonly HomeController _sut;
+
+        public HomeControllerShould()
+        {
+            _sut = new HomeController();
+        }
+
         [Fact]
         public void ShowIndex()
         {
-            var homeController = new HomeController();
-            var result = homeController.Index();
+            var result = _sut.Index();
+            Assert.IsType<ViewResult>(result);
+        }
 
+        [Fact]
+        public void ShowPrivacy()
+        {
+            var result = _sut.Privacy();
             Assert.IsType<ViewResult>(result);
         }
     }
