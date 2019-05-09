@@ -20,8 +20,11 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '2.2.202'
-- script: dotnet build 
-  displayName: 'dotnet build'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
 - task: DotNetCoreCLI@2
   condition: 
   displayName: 'Tests'
@@ -31,5 +34,5 @@ steps:
     versioningScheme: 'off'
 - task: PublishBuildArtifacts@1
   inputs:
-    ArtifactName: 'drop'
-    PathtoPublish: $(Build.ArtifactStagingDirectory)
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
