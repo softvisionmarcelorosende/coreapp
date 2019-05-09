@@ -20,8 +20,8 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '2.2.202'
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: dotnet build 
+  displayName: 'dotnet build'
 - task: DotNetCoreCLI@2
   condition: 
   displayName: 'Tests'
