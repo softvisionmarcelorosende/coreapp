@@ -17,11 +17,17 @@ steps:
   inputs:
     version: '2.2.202'
 - script: dotnet restore
-  displayName: RESTORE
-- script: dotnet build
-  displayName: BUILD
+  displayName: 'RESTORE'
+- script: dotnet build --configuration $(BuildConfiguration)
+  displayName: 'BUILD'
 - script: dotnet test
-  displayName: TEST
+  displayName: 'TEST'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 - task: PublishBuildArtifacts@1
   displayName: PUBLISH
   inputs:
